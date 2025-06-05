@@ -1,8 +1,10 @@
 ---
-title: "Observatório do emprego"
 project:
   type: website
   output-dir: docs
+
+website:
+  title: "Observatório do emprego"
 format:
   html:
     css: styles.css
