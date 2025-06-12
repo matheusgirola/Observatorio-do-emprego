@@ -18,6 +18,11 @@ import pandas as pd
 caged = pd.read_csv('Saldo_acumulado_gov.csv', index_col = 0)
 mei = pd.read_csv('MEI_estoque_gov.csv', index_col = 0)
 concursado = pd.read_csv('Concursados_acumulado_gov.csv', index_col = 0)
+bolsas = pd.read_csv('Bolsasestudo.csv', index_col = 0)
 
-pd.concat([caged, mei, concursado], axis = 1).astype('int')
+final = pd.concat([caged, mei, concursado, bolsas], axis = 1).astype('int')
+final['Total'] = final.sum(axis = 1)
+final.loc['Total'] = final.sum(axis = 0)
+final
+
 ```
