@@ -84,15 +84,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="472b349d" class="cell" data-execution_count="1">
+<div id="9f45b9e1" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>caged <span class="op">=</span> pd.read_csv(<span class="st">'Saldo_acumulado_gov.csv'</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mei <span class="op">=</span> pd.read_csv(<span class="st">'MEI_estoque_gov.csv'</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>concursado <span class="op">=</span> pd.read_csv(<span class="st">'Concursados_acumulado_gov.csv'</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pd.concat([caged, mei, concursado], axis <span class="op">=</span> <span class="dv">1</span>).astype(<span class="st">'int'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>bolsas <span class="op">=</span> pd.read_csv(<span class="st">'Bolsasestudo.csv'</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>final <span class="op">=</span> pd.concat([caged, mei, concursado, bolsas], axis <span class="op">=</span> <span class="dv">1</span>).astype(<span class="st">'int'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>final[<span class="st">'Total'</span>] <span class="op">=</span> final.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>final.loc[<span class="st">'Total'</span>] <span class="op">=</span> final.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>final</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
 
@@ -103,6 +107,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th data-quarto-table-cell-role="th">Saldo</th>
 <th data-quarto-table-cell-role="th">Total Meis</th>
 <th data-quarto-table-cell-role="th">Concursos</th>
+<th data-quarto-table-cell-role="th">Bolsas de Estudo</th>
+<th data-quarto-table-cell-role="th">Total</th>
 </tr>
 </thead>
 <tbody>
@@ -111,18 +117,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>20048</td>
 <td>5476</td>
 <td>1245</td>
+<td>0</td>
+<td>26769</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">2024</td>
 <td>13120</td>
 <td>2752</td>
 <td>710</td>
+<td>0</td>
+<td>16582</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2025</td>
 <td>7314</td>
 <td>-1537</td>
 <td>0</td>
+<td>7555</td>
+<td>13332</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Total</td>
+<td>40482</td>
+<td>6691</td>
+<td>1955</td>
+<td>7555</td>
+<td>56683</td>
 </tr>
 </tbody>
 </table>
