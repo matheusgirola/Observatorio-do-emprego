@@ -84,7 +84,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="0dc2c6b3" class="cell" data-execution_count="1">
+<div id="bbcd5799" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>caged <span class="op">=</span> pd.read_csv(<span class="st">'Saldo_acumulado_gov.csv'</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
@@ -96,7 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>final[<span class="st">'Total'</span>] <span class="op">=</span> final.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>final.loc[<span class="st">'Total'</span>] <span class="op">=</span> final.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">0</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>final</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -122,27 +122,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">2024</td>
-<td>13120</td>
+<td>13106</td>
 <td>2752</td>
 <td>710</td>
 <td>1161</td>
-<td>17743</td>
+<td>17729</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2025</td>
-<td>10905</td>
+<td>13912</td>
 <td>-1537</td>
 <td>0</td>
 <td>256</td>
-<td>9624</td>
+<td>12631</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">Total</td>
-<td>44073</td>
+<td>47066</td>
 <td>6691</td>
 <td>1955</td>
 <td>1500</td>
-<td>54219</td>
+<td>57212</td>
 </tr>
 </tbody>
 </table>
