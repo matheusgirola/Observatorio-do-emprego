@@ -87,19 +87,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="0d7d5270" class="cell" data-execution_count="1">
+<div id="50f1d1e2" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>caged <span class="op">=</span> pd.read_csv(<span class="st">'Saldo_acumulado_gov.csv'</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mei <span class="op">=</span> pd.read_csv(<span class="st">'MEI_estoque_gov.csv'</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>concursado <span class="op">=</span> pd.read_csv(<span class="st">'Concursados_acumulado_gov.csv'</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>bolsas <span class="op">=</span> pd.read_csv(<span class="st">'Bolsasestudo.csv'</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#bolsas = pd.read_csv('Bolsasestudo.csv', index_col = 0)</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>final <span class="op">=</span> pd.concat([caged, mei, concursado, bolsas], axis <span class="op">=</span> <span class="dv">1</span>).astype(<span class="st">'int'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>final <span class="op">=</span> pd.concat([caged, mei, concursado], axis <span class="op">=</span> <span class="dv">1</span>).astype(<span class="st">'int'</span>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>final[<span class="st">'Total'</span>] <span class="op">=</span> final.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>final.loc[<span class="st">'Total'</span>] <span class="op">=</span> final.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">0</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>final</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -110,7 +110,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th data-quarto-table-cell-role="th">Saldo</th>
 <th data-quarto-table-cell-role="th">Total Meis</th>
 <th data-quarto-table-cell-role="th">Concursos</th>
-<th data-quarto-table-cell-role="th">Bolsas de Estudo</th>
 <th data-quarto-table-cell-role="th">Total</th>
 </tr>
 </thead>
@@ -120,31 +119,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>20033</td>
 <td>6624</td>
 <td>1224</td>
-<td>83</td>
-<td>27964</td>
+<td>27881</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">2024</th>
 <td>13133</td>
 <td>7098</td>
 <td>783</td>
-<td>1161</td>
-<td>22175</td>
+<td>21014</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2025</th>
 <td>20418</td>
 <td>12819</td>
 <td>982</td>
-<td>256</td>
-<td>34475</td>
+<td>34219</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">2026</th>
 <td>8432</td>
 <td>4853</td>
 <td>269</td>
-<td>0</td>
 <td>13554</td>
 </tr>
 <tr class="odd">
@@ -152,8 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>62016</td>
 <td>31394</td>
 <td>3258</td>
-<td>1500</td>
-<td>98168</td>
+<td>96668</td>
 </tr>
 </tbody>
 </table>
