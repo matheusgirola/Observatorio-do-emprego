@@ -1,0 +1,26 @@
+{
+  "meta": 250000,
+  "inicio_meta": "2023-01",
+  "fim_meta": "2030-12",
+  "competencia_caged": "2026-09",
+  "competencia_mei": "2026-09",
+  "realizado": 112949,
+  "premissa_concursados": 4344,
+  "residuo_a_projetar": 132707,
+  "estrategia": "B - componentes dependentes (copula)",
+  "p_meta": 0.63825,
+  "ic_inf": 0.631590635681079,
+  "ic_sup": 0.644909364318921,
+  "p_meta_trajetorias": 0.625,
+  "total_fim_mediana": 260913,
+  "total_fim_q10": 222998,
+  "total_fim_q90": 287473,
+  "modelos": {
+    "caged": ["arima", "ets", "stl_arima"],
+    "mei": ["ets", "stl_arima", "arima"],
+    "agregado": ["stl_arima", "ets_saz", "arima"]
+  },
+  "rho_componentes": 0.3,
+  "modo": "mensal",
+  "data_execucao": "2026-11-06T10:56:53-0300"
+}

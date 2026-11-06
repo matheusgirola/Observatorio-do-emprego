@@ -1,0 +1,29 @@
+project:
+  type: website
+  output-dir: _site
+  # A página antiga (resumo.qmd) fica fora do site: o link resumo.html agora
+  # redireciona para cá (aliases em index.qmd).
+  render:
+    - index.qmd
+
+website:
+  title: "Observatório do Emprego · Piauí"
+  page-navigation: false
+
+lang: pt-BR
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-title: "Nesta página"
+    toc-location: right
+    smooth-scroll: true
+
+execute:
+  echo: false
+  warning: false
+  message: false
+
+jupyter: python3

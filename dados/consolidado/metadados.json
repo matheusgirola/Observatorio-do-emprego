@@ -1,0 +1,52 @@
+{
+  "data_consolidacao": "2026-11-06T10:04:25-03:00",
+  "competencia_caged": "2026-09",
+  "competencia_mei": "2026-09",
+  "mei_congelado_ate": 2025,
+  "componentes": [
+    "caged",
+    "mei",
+    "concursados"
+  ],
+  "fontes": {
+    "caged": {
+      "fonte": "Novo Caged — MTE (3-tabelas), séries com ajustes (tabelas 7.1 e 8.1)",
+      "arquivo_origem": "3-tabelas_Setembro de 2026.xlsx",
+      "competencia_mais_recente": "2026-09",
+      "data_execucao": "2026-11-06T09:53:13-03:00",
+      "arquivos": {
+        "caged_pi_mensal.csv": {
+          "linhas": 81,
+          "competencia_inicial": "2020-01",
+          "competencia_final": "2026-09"
+        },
+        "caged_municipios_mensal.csv": {
+          "linhas": 10080,
+          "competencia_inicial": "2023-01",
+          "competencia_final": "2026-09"
+        },
+        "caged_comparativo_estoque.csv": {
+          "linhas": 138,
+          "competencia_inicial": "2022-12",
+          "competencia_final": "2026-09"
+        }
+      },
+      "verificacoes": {
+        "soma_municipios_igual_saldo_pi": true,
+        "saldo_igual_admissoes_menos_desligamentos": true,
+        "avisos": []
+      }
+    },
+    "mei": {
+      "fonte": "Receita Federal — dados abertos do CNPJ, regra do painel Mapa de Empresas",
+      "definicao": "abertos_mei: início de atividade no mês com opção pelo MEI até 31 dias depois; fechados_mei: baixados no mês que eram MEI na baixa; saldo = abertos - fechados",
+      "uf": "PI",
+      "dump": "2026-10",
+      "data_foto": "2026-10-11",
+      "competencia_mais_recente": "2026-09",
+      "data_execucao": "2026-11-06T10:01:38-03:00",
+      "linhas": 45
+    }
+  },
+  "avisos": []
+}

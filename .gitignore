@@ -1,2 +1,12 @@
 desktop.ini
 .pynb_checkpoints
+
+logs/
+__pycache__/
+.pytest_cache/
+*.tmp
+_site/
+.quarto/
+
+/.quarto/
+**/*.quarto_ipynb

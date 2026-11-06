@@ -1,0 +1,10 @@
+{
+  "fonte": "Receita Federal — dados abertos do CNPJ, regra do painel Mapa de Empresas",
+  "definicao": "abertos_mei: início de atividade no mês com opção pelo MEI até 31 dias depois; fechados_mei: baixados no mês que eram MEI na baixa; saldo = abertos - fechados",
+  "uf": "PI",
+  "dump": "2026-10",
+  "data_foto": "2026-10-11",
+  "competencia_mais_recente": "2026-09",
+  "data_execucao": "2026-11-06T10:01:38-03:00",
+  "linhas": 45
+}

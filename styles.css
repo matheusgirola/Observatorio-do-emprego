@@ -1,0 +1,57 @@
+/* Observatório do Emprego — estilos da página */
+:root {
+  --obs-tinta: #0b0b0b;
+  --obs-tinta-2: #52514e;
+  --obs-tinta-3: #8a8984;
+  --obs-borda: #e6e5e1;
+  --obs-superficie: #fcfcfb;
+  --obs-destaque: #184f95;
+}
+
+body { color: var(--obs-tinta); }
+
+.subtitulo { color: var(--obs-tinta-2); font-size: 1.05rem; margin-top: -0.5rem; }
+
+/* Cartões de destaque */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 1.25rem 0 1.5rem;
+}
+.kpi {
+  background: var(--obs-superficie);
+  border: 1px solid var(--obs-borda);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.kpi-valor {
+  font-size: 1.9rem;
+  font-weight: 650;
+  line-height: 1.1;
+  color: var(--obs-tinta);
+  font-variant-numeric: tabular-nums;
+}
+.kpi-rotulo { color: var(--obs-tinta); margin-top: 4px; }
+.kpi-detalhe { color: var(--obs-tinta-3); font-size: 0.85rem; margin-top: 2px; }
+
+/* Tabelas */
+.tabela-rolagem { overflow-x: auto; margin-bottom: 1rem; }
+.tabela-obs { font-size: 0.95rem; margin-bottom: 0; }
+.tabela-obs th { color: var(--obs-tinta-2); font-weight: 600; border-bottom-width: 1px; }
+.tabela-obs.numerica td:not(:first-child),
+.tabela-obs.numerica th:not(:first-child) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.tabela-obs tr.total td { border-top: 2px solid var(--obs-borda); }
+.tabela-obs caption { caption-side: top; color: var(--obs-tinta-2); }
+.nota { color: var(--obs-tinta-3); font-size: 0.85em; font-weight: 400; }
+
+.fonte { color: var(--obs-tinta-3); font-size: 0.85rem; margin-top: -0.25rem; }
+
+@media (max-width: 576px) {
+  .kpi-valor { font-size: 1.6rem; }
+  .tabela-obs { font-size: 0.85rem; }
+}

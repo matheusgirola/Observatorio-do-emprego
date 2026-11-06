@@ -1,0 +1,167 @@
+---
+title: "Oportunidades de renda no Piauí"
+aliases:
+  - resumo.html
+---
+
+```{python}
+#| include: false
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path.cwd()))
+from pipeline import pagina as P
+
+d = P.carregar()
+tem_proj = P.projecao_valida(d)
+comp = d.meta["competencia_caged"]
+meta = d.cfg["meta"]
+```
+
+```{python}
+#| output: asis
+print(f'<p class="subtitulo">Empregos formais, microempreendedores individuais e '
+      f'concursados gerados desde janeiro de 2023. Dados até '
+      f'{P.mes_longo(comp)}.</p>')
+print(P.html_destaques(d))
+```
+
+## Por ano
+
+```{python}
+#| output: asis
+print(P.tabela_anual(d))
+print('<p class="fonte">Emprego formal: saldo do Novo Caged (MTE), com ajustes. '
+      f'MEI: painel Mapa de Empresas até {d.cfg["mei_congelado_ate"]} e, depois, '
+      'base de CNPJ da Receita Federal (ver <a href="#dados-e-fontes">Dados e fontes</a>). '
+      'Concursados: valores anuais informados manualmente.</p>')
+```
+
+## Mês a mês
+
+```{python}
+#| output: asis
+print(f'<p>Saldo mensal de empregos formais e de MEI. O MEI aparece mês a mês a partir '
+      f'de {int(d.cfg["mei_congelado_ate"]) + 1}; nos anos anteriores ele consta só na '
+      'tabela anual. Os concursados são registrados por ano.</p>')
+```
+
+```{python}
+P.fig_mensal(d).show(config=P.CONFIG_PLOTLY)
+```
+
+## Rumo à meta
+
+```{python}
+#| output: asis
+if tem_proj:
+    p = d.proj
+    print(f'<p>A meta é chegar a <b>{P.fmt(meta["valor"])}</b> oportunidades de '
+          f'{P.mes_curto(meta["inicio"])} a {P.mes_curto(meta["fim"])}. Até '
+          f'{P.mes_curto(comp)} foram <b>{P.fmt(p["realizado"])}</b>; faltam '
+          f'{P.fmt(meta["valor"] - p["realizado"])}. Mantido o ritmo que os modelos '
+          f'estimam a partir da série, a chance de chegar lá é de '
+          f'<b>{P.fmt(100 * p["p_meta"], 0)}%</b>.</p>')
+else:
+    print('<p><i>A projeção ainda não foi atualizada para os dados deste mês.</i></p>')
+```
+
+```{python}
+P.fig_trajetoria(d).show(config=P.CONFIG_PLOTLY)
+```
+
+```{python}
+#| output: asis
+if tem_proj:
+    print('<p class="fonte">Linha contínua: total realizado (o MEI dos anos com valor '
+          'anual e os concursados foram distribuídos igualmente pelos meses do ano só '
+          'para desenhar a linha). Linha tracejada: mediana da projeção; faixas: '
+          'intervalos de 80% e 90% das 20 mil trajetórias simuladas.</p>')
+    print(P.tabela_projecao(d))
+```
+
+## Por território
+
+```{python}
+#| output: asis
+ini_mun = d.municipios.competencia.min()
+print(f'<p>Saldo de empregos formais acumulado de {P.mes_curto(ini_mun)} a '
+      f'{P.mes_curto(comp)}, por Território de Desenvolvimento. O MEI e os concursados '
+      'ainda não têm recorte territorial nesta página.</p>')
+print(P.tabela_territorios(d))
+```
+
+:::: {.columns}
+::: {.column width="48%"}
+**Maiores saldos**
+
+```{python}
+#| output: asis
+print(P.tabela_municipios(d, maiores=True))
+```
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="48%"}
+**Menores saldos**
+
+```{python}
+#| output: asis
+print(P.tabela_municipios(d, maiores=False))
+```
+:::
+::::
+
+## Piauí, Nordeste e Brasil
+
+```{python}
+#| output: asis
+c = d.comparativo
+base = c.competencia.min()
+ult = c[c.competencia == comp].set_index("area")["estoque"]
+b = c[c.competencia == base].set_index("area")["estoque"]
+var = (ult / b - 1) * 100
+print(f'<p>Estoque de empregos formais com {P.mes_curto(base)} = 100. Desde então o '
+      f'Piauí cresceu <b>{P.fmt(var["Piauí"], 1)}%</b>, contra '
+      f'{P.fmt(var["Nordeste"], 1)}% no Nordeste e {P.fmt(var["Brasil"], 1)}% no '
+      'Brasil.</p>')
+```
+
+```{python}
+P.fig_comparativo(d).show(config=P.CONFIG_PLOTLY)
+```
+
+## Dados e fontes
+
+```{python}
+#| output: asis
+f = d.meta["fontes"]
+linhas = [
+    f'<li><b>Emprego formal</b>: saldo (admissões menos desligamentos) do Novo Caged, '
+    f'Ministério do Trabalho e Emprego, séries com ajustes (tabelas 7.1 e 8.1). '
+    f'Planilha usada: <i>{f["caged"].get("arquivo_origem", "")}</i>. Cada atualização '
+    'recalcula a série inteira, então os anos anteriores podem mudar um pouco com as '
+    'declarações entregues fora do prazo.</li>',
+    f'<li><b>MEI</b>: até {d.cfg["mei_congelado_ate"]}, valores anuais do painel Mapa '
+    'de Empresas (MDIC), congelados. A partir de '
+    f'{int(d.cfg["mei_congelado_ate"]) + 1}, MEIs abertos menos MEIs baixados no mês, '
+    'pela base aberta de CNPJ da Receita Federal com a regra de naturezas jurídicas do '
+    f'painel (base de {P.data_br(f["mei"].get("data_foto", ""))}). Os números da base aberta '
+    'ficam alguns por cento acima do painel.</li>',
+    '<li><b>Concursados</b>: valores anuais informados manualmente '
+    '(<code>dados/manual/concursados.csv</code>).</li>',
+]
+if tem_proj:
+    p = d.proj
+    linhas.append(
+        f'<li><b>Projeção</b>: média de modelos de séries temporais (ARIMA, ETS e STL) '
+        'ajustados ao saldo do Caged e ao do MEI, com 20 mil trajetórias simuladas por '
+        'bootstrap e dependência entre os dois componentes. Os concursados futuros entram '
+        f'como premissa fixa: a média anual dos anos completos ({P.fmt(p["premissa_concursados"])} '
+        f'até {P.mes_curto(p["fim_meta"])}). A projeção não incorpora mudanças de política '
+        'ou choques que não estejam no histórico.</li>')
+print('<ul>' + ''.join(linhas) + '</ul>')
+print(f'<p class="fonte">Atualizado em {P.data_br(d.meta["data_consolidacao"])}. '
+      'Pipeline e código: <a href="https://github.com/matheusgirola/Observatorio-do-emprego">'
+      'repositório do Observatório</a>.</p>')
+```

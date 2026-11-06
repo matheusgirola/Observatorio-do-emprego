@@ -1,0 +1,35 @@
+# Configuração da pipeline do Observatório do Emprego.
+# Caminhos absolutos desta máquina; ajuste se os repositórios mudarem de lugar.
+
+ano_inicio: 2023
+
+repositorios:
+  caged: C:/Users/matheus.barbosa/Desktop/relatorio-emprego-formal
+  cnpj: C:/Users/matheus.barbosa/Desktop/Python/Montar-BaseDados-CNPJ
+  projecao: C:/Users/matheus.barbosa/Desktop/Repositorios/Projecao-empregos-Piaui
+
+# Python que roda o export do CAGED (precisa de pandas e openpyxl).
+python_caged: python
+
+# Dumps do CNPJ (HD externo) e onde o DuckDB derrama em disco.
+cnpj_dados: E:/cnpj
+cnpj_tmp: C:/temp/duckdb
+
+# MEI: anos até este ficam congelados com os valores do painel Mapa de Empresas
+# (dados/manual/mei_mapa_empresas.csv). Depois dele, o MEI vem do dump do CNPJ.
+mei_congelado_ate: 2025
+
+# As bolsas de estudo estão fora do total publicado desde jun/2026.
+incluir_bolsas: false
+
+# Revisão de um ano já fechado acima deste percentual gera aviso na revisão.
+limite_revisao_pct: 2.0
+
+# Meta de oportunidades (provisória, definida em 06/11/2026): total do Observatório
+# (CAGED + MEI + concursados) acumulado desde o início até o fim do horizonte.
+meta:
+  valor: 250000
+  inicio: 2023-01
+  fim: 2030-12
+
+rscript: C:/Users/matheus.barbosa/AppData/Local/Programs/R/R-4.5.2/bin/Rscript.exe
