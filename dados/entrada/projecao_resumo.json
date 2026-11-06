@@ -1,17 +1,17 @@
 {
-  "meta": 250000,
+  "meta": 180000,
   "inicio_meta": "2023-01",
   "fim_meta": "2030-12",
   "competencia_caged": "2026-09",
   "competencia_mei": "2026-09",
   "realizado": 112949,
   "premissa_concursados": 4344,
-  "residuo_a_projetar": 132707,
+  "residuo_a_projetar": 62707,
   "estrategia": "B - componentes dependentes (copula)",
-  "p_meta": 0.63825,
-  "ic_inf": 0.631590635681079,
-  "ic_sup": 0.644909364318921,
-  "p_meta_trajetorias": 0.625,
+  "p_meta": 0.9958,
+  "ic_inf": 0.994903719806274,
+  "ic_sup": 0.996696280193726,
+  "p_meta_trajetorias": 0.997,
   "total_fim_mediana": 260913,
   "total_fim_q10": 222998,
   "total_fim_q90": 287473,
@@ -22,5 +22,5 @@
   },
   "rho_componentes": 0.3,
   "modo": "mensal",
-  "data_execucao": "2026-11-06T10:56:53-0300"
+  "data_execucao": "2026-11-06T12:19:03-0300"
 }

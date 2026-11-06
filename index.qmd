@@ -61,7 +61,14 @@ if tem_proj:
           f'{P.mes_curto(comp)} foram <b>{P.fmt(p["realizado"])}</b>; faltam '
           f'{P.fmt(meta["valor"] - p["realizado"])}. Mantido o ritmo que os modelos '
           f'estimam a partir da série, a chance de chegar lá é de '
-          f'<b>{P.fmt(100 * p["p_meta"], 0)}%</b>.</p>')
+          f'<b>{P.fmt_prob(p["p_meta"])}</b>.')
+    med, q10 = P.cruzamento_meta(d, "mediana"), P.cruzamento_meta(d, "q10")
+    if med:
+        print(f' Pela mediana da projeção, a meta é alcançada em '
+              f'<b>{P.mes_curto(med)}</b>'
+              + (f'; em 90% das trajetórias, até {P.mes_curto(q10)}' if q10 else '')
+              + '.')
+    print('</p>')
 else:
     print('<p><i>A projeção ainda não foi atualizada para os dados deste mês.</i></p>')
 ```

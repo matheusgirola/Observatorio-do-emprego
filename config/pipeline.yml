@@ -28,7 +28,7 @@ limite_revisao_pct: 2.0
 # Meta de oportunidades (provisória, definida em 06/11/2026): total do Observatório
 # (CAGED + MEI + concursados) acumulado desde o início até o fim do horizonte.
 meta:
-  valor: 250000
+  valor: 180000
   inicio: 2023-01
   fim: 2030-12
 

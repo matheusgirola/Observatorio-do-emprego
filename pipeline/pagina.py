@@ -46,6 +46,16 @@ def fmt(n: float, dec: int = 0) -> str:
     return s.replace(",", "§").replace(".", ",").replace("§", ".")
 
 
+def fmt_prob(p: float) -> str:
+    """Probabilidade em %: inteira no meio da escala e com uma casa perto dos
+    extremos, para 0,996 não virar um "100%" que sugere certeza."""
+    if p in (0.0, 1.0):
+        return f"{fmt(100 * p)}%"
+    if 0.02 < p < 0.98:
+        return f"{fmt(100 * p)}%"
+    return f"{fmt(min(max(100 * p, 0.1), 99.9), 1)}%"
+
+
 def fmt_sinal(n: float) -> str:
     return ("+" if n > 0 else "") + fmt(n)
 
@@ -301,6 +311,20 @@ def tabela_municipios(d: Dados, maiores: bool = True, n: int = 10) -> str:
 
 
 # ------------------------------------------------------------------ destaques
+def cruzamento_meta(d: Dados, coluna: str = "mediana") -> str | None:
+    """Primeira competência em que o quantil `coluna` do acumulado projetado
+    alcança a meta (None se não alcança no horizonte). Com q10, é o mês até o
+    qual 90% das trajetórias já chegaram lá."""
+    if not projecao_valida(d):
+        return None
+    meta = float(d.cfg["meta"]["valor"])
+    if d.proj["realizado"] >= meta:
+        return d.meta["competencia_caged"]
+    p = d.proj_mensal
+    acima = p.competencia[p[coluna] >= meta]
+    return acima.iloc[0] if len(acima) else None
+
+
 def destaques(d: Dados) -> list[tuple[str, str, str]]:
     """(valor, rótulo, detalhe) dos cartões do topo."""
     ini = d.cfg["meta"]["inicio"]
@@ -316,7 +340,7 @@ def destaques(d: Dados) -> list[tuple[str, str, str]]:
     ]
     if projecao_valida(d):
         p = d.proj
-        cards.append((fmt(100 * p["p_meta"], 0) + "%",
+        cards.append((fmt_prob(p["p_meta"]),
                       f"de chance de chegar a {fmt(p['meta'] / 1000)} mil",
                       f"até {mes_curto(p['fim_meta'])}"))
         cards.append((fmt(p["total_fim_mediana"] / 1000) + " mil",

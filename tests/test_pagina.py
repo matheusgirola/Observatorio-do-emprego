@@ -17,6 +17,10 @@ def test_formatos():
     assert P.mes_curto("2026-09") == "set/2026"
     assert P.mes_longo("2026-03") == "março de 2026"
     assert P.data_br("2026-11-06T10:04:25-03:00") == "06/11/2026"
+    assert P.fmt_prob(0.638) == "64%"
+    assert P.fmt_prob(0.9958) == "99,6%"
+    assert P.fmt_prob(0.99996) == "99,9%"
+    assert P.fmt_prob(1.0) == "100%"
 
 
 @pytest.fixture(scope="module")
@@ -42,6 +46,18 @@ def test_territorios_somam_o_estado(d):
     t = P.territorios(d)
     caged = d.caged[d.caged.competencia >= d.municipios.competencia.min()].saldo.sum()
     assert t.saldo.sum() == caged
+
+
+def test_cruzamento_meta_coerente(d):
+    """A mediana alcança a meta antes (ou junto) do quantil 10%."""
+    if not P.projecao_valida(d):
+        pytest.skip("sem projeção válida")
+    med, q10 = P.cruzamento_meta(d, "mediana"), P.cruzamento_meta(d, "q10")
+    if med and q10:
+        assert med <= q10
+    if med:
+        linha = d.proj_mensal.set_index("competencia").loc[med]
+        assert linha.mediana >= d.cfg["meta"]["valor"]
 
 
 def test_pecas_montam(d):
